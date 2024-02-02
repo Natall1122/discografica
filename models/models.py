@@ -39,6 +39,12 @@ class Cantants(models.Model, Persona):
     def _compute_numAlbums(self):
         for cantant in self:
             cantant.numAlbums = len(cantant.albums)
+    
+    @api.depends('birth_year')
+    def _get_age(self):
+        for cantant in self:
+            cantant.age = fields.Datetime.now().year-cantant.birth_year
+
 
     
 class Albums(models.Model):
@@ -102,6 +108,10 @@ class Representants(models.Model, Persona):
     photo = fields.Image(max_width = 200, max_height=200)
     cantant = fields.One2many('discografica.cantants', "representant")
 
+    @api.depends('birth_year')
+    def _get_age(self):
+        for representant in self:
+            representant.age = fields.Datetime.now().year-representant.birth_year
 
 
 class Events(models.Model):
