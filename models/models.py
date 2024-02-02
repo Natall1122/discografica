@@ -10,7 +10,7 @@ class Persona(AbstractModel):
     name = fields.Char()
     surname = fields.Char()
     birth_year = fields.Integer()
-    age = fields.Integer(compute='get_age', store=True)
+    age = fields.Integer(compute='_get_age', store=True)
     contact = fields.Char()
     dni = fields.Char(string="DNI")
 
@@ -19,7 +19,10 @@ class Persona(AbstractModel):
         for persona in self:
             persona.age = fields.Datetime.now().year-persona.birth_year
 
-
+    @api.depends('birth_year')
+    def _get_age(self):
+        for persona in self:
+            persona.age = fields.Datetime.now().year-persona.birth_year
 
 class Cantants(models.Model, Persona):
     _name = 'discografica.cantants'
@@ -40,18 +43,13 @@ class Cantants(models.Model, Persona):
         for cantant in self:
             cantant.numAlbums = len(cantant.albums)
     
-    @api.depends('birth_year')
-    def _get_age(self):
-        for cantant in self:
-            cantant.age = fields.Datetime.now().year-cantant.birth_year
-
 
     
 class Albums(models.Model):
     _name = 'discografica.albums'
     _description = 'discografica.description'
 
-    title = fields.Char()
+    name = fields.Char()
     date = fields.Date()
     description = fields.Text()
     portada = fields.Image(max_width = 200, max_height=200)
@@ -108,10 +106,6 @@ class Representants(models.Model, Persona):
     photo = fields.Image(max_width = 200, max_height=200)
     cantant = fields.One2many('discografica.cantants', "representant")
 
-    @api.depends('birth_year')
-    def _get_age(self):
-        for representant in self:
-            representant.age = fields.Datetime.now().year-representant.birth_year
 
 
 class Events(models.Model):
