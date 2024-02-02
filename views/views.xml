@@ -1,0 +1,164 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!-- VISTA CANTANT -->
+    <record model="ir.ui.view" id="discografica.cantants_list">
+      <field name="name">Cantants</field>
+      <field name="model">discografica.cantants</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="surname"/>
+          <field name="age"/>
+          <field name="contact"/>
+          <field name="numAlbums"/>
+          <field name="numPremis"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="discografica.cantant_action_window">
+      <field name="name">Cantants</field>
+      <field name="res_model">discografica.cantants</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- VISTA ALBUM -->
+
+    <record model="ir.ui.view" id="discografica.album_list">
+      <field name="name">Àlbums</field>
+      <field name="model">discografica.albums</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="title"/>
+          <field name="date"/>
+          <field name="numSongs"/>
+          <field name="price"/>
+        </tree>
+      </field>
+    </record>
+
+
+
+    <record model="ir.actions.act_window" id="discografica.album_action_window">
+      <field name="name">Àlbums</field>
+      <field name="res_model">discografica.albums</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- VISTA CANÇÓ -->
+
+    <record model="ir.ui.view" id="discografica.songs_list">
+      <field name="name">Cançons</field>
+      <field name="model">discografica.songs</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="title"/>
+          <field name="duration_display"/>
+          <field name="album"/>
+        </tree>
+      </field>
+    </record>
+
+
+
+    <record model="ir.actions.act_window" id="discografica.songs_action_window">
+      <field name="name">Cançons</field>
+      <field name="res_model">discografica.songs</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- VISTA REPRESENTANT -->
+
+    <record model="ir.ui.view" id="discografica.representants_list">
+      <field name="name">Representants</field>
+      <field name="model">discografica.representants</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="surname"/>
+          <field name="contact"/>
+          <field name="cantant"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="discografica.repre_action_window">
+      <field name="name">Representants</field>
+      <field name="res_model">discografica.representants</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+    <!-- VISTA EVENT -->
+    <record model="ir.ui.view" id="discografica.event_list">
+      <field name="name">Events</field>
+      <field name="model">discografica.events</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="date"/>
+          <field name="location"/>
+          <field name="cantants"/>
+          <field name="type"/>
+          <field name="priceTicket"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="discografica.event_action_window">
+      <field name="name">Events</field>
+      <field name="res_model">discografica.events</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+    <!-- FORM CANTANT -->
+
+
+    <!-- FORM ÀLBUM -->
+
+
+    <!-- FORM CANÇÓ -->
+
+
+    <!-- FORM REPRESENTANT -->
+
+
+    <!-- FORM EVENT -->
+
+
+
+
+    <!-- Top menu item -->
+
+    <menuitem name="Discogràfica" id="discografica.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Mangment" id="discografica.managment" parent="discografica.menu_root"/>
+
+
+    <!-- actions -->
+
+    <menuitem name="Àlbums" id="discografica.albums_menu_list" parent="discografica.managment"
+              action="discografica.album_action_window"/>
+
+    <menuitem name="Cançons" id="discografica.songs_menu_list" parent="discografica.managment"
+              action="discografica.songs_action_window"/>
+
+    <menuitem name="Cantants" id="discografica.cantants_menu_list" parent="discografica.managment"
+              action="discografica.cantant_action_window"/>
+
+   <menuitem name="Events" id="discografica.events_menu_list" parent="discografica.managment"
+              action="discografica.event_action_window"/>
+
+    <menuitem name="Representants" id="discografica.representants_menu_list" parent="discografica.managment"
+              action="discografica.repre_action_window"/>
+
+  </data>
+</odoo>

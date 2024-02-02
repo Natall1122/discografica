@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_discografica_cantants,discografica.cantants,model_discografica_cantants,base.group_user,1,1,1,1
+access_discografica_albums,discografica.albums,model_discografica_albums,base.group_user,1,1,1,1
+access_discografica_songs,discografica.songs,model_discografica_songs,base.group_user,1,1,1,1
+access_discografica_representants,discografica.representants,model_discografica_representants,base.group_user,1,1,1,1
+access_discografica_events,discografica.events,model_discografica_events,base.group_user,1,1,1,1
