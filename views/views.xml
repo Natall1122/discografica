@@ -54,7 +54,7 @@
       <field name="model">discografica.songs</field>
       <field name="arch" type="xml">
         <tree>
-          <field name="title"/>
+          <field name="name"/>
           <field name="duration_display"/>
           <field name="album"/>
         </tree>
@@ -117,31 +117,153 @@
 
 
 
-    <!-- FORM CANTANT 
+    <!-- FORM CANTANT -->
     <record model="ir.ui.view" id="discografica.cantants_form">
       <field name="name">Cantants</field>
       <field name="model">discografica.cantants</field>
       <field name="arch" type="xml">
         <form>
-          <group>
-            <field name="name"/>
-            <field name="surname"/>
-            <field name="age"/>
-            <field name="contact"/>
-            <field name="numAlbums"/>
-            <field name="numPremis"/>
-          </group>
+          <notebook>
+            <page string="Pàgina 1">
+              <sheet>
+                <group>
+                  <separator string="Dades personals"/>
+                  <field name="name"/>
+                  <field name="surname"/>
+                  <field name="dni"/>
+                  <field name="birth_year"/>
+                  <field name="age"/>
+                  <field name="contact"/>
+                  <field name="photo"/>
+                </group>
+              </sheet>
+            </page>
+            <page string="Pàgina 2">
+              <sheet>
+                <group>
+                  <separator string="Dades professionals"/>
+                  <field name="representant"/>
+                  <field name="contracte"/>
+                  <field name="numAlbums"/>
+                  <field name="numPremis"/>
+                  <field name="albums"/>
+                  <field name="events"/>
+                </group>
+              </sheet>
+            </page>          
+          </notebook>
         </form>
-      </field>-->
-
+      </field>
+    </record>
 
     <!-- FORM ÀLBUM -->
+    <record model="ir.ui.view" id="discografica.albums_form">
+      <field name="name">Albums</field>
+      <field name="model">discografica.albums</field>
+      <field name="arch" type="xml">
+        <form>
+          <notebook>
+            <page string="Pàgina 1">
+              <sheet>
+                <group>
+                  <separator string="Dades Principals"/>
+                  <field name="cantant"/>
+                  <field name="name"/>
+                  <field name="date"/>
+                  <field name="description"/>
+                  <field name="duracio_total"/>
+                  <field name="portada"/>
+                </group>
+              </sheet>
+              <sheet>
+                <group>
+                  <separator string="Dades monetàries"/>
+                  <field name="currency_id"/>
+                  <field name="price"/>
+                  <field name="ventes"/>
+                  <field name="moneyArreplegat"/>
+                </group>
+              </sheet>
+            </page>
+            <page string="Pàgina 2">
+              <sheet>
+                <group>
+                  <separator string="Dades cançons"/>
+                  <field name="numSongs"/>
+                  <field name="song"/>
+                </group>
+              </sheet>
+            </page>          
+          </notebook>
+        </form>
+      </field>
+    </record>
 
 
     <!-- FORM CANÇÓ -->
-
+    <record model="ir.ui.view" id="discografica.songs_form">
+      <field name="name">Cançons</field>
+      <field name="model">discografica.songs</field>
+      <field name="arch" type="xml">
+        <form>
+          <notebook>
+            <page string="Pàgina 1">
+              <sheet>
+                <group>
+                  <separator string="Dades cançó"/>
+                  <field name="name"/>
+                  <field name="album"/>
+                  <field name="duration_minutes"/>
+                  <field name="duration_display"/>
+                </group>
+              </sheet>
+            </page>
+            <page string="Pàgina 2">
+              <sheet>
+                <group>
+                  <separator string="Estructura"/>
+                  <field name="lyrics"/>
+                  <field name="pratitura"/>
+                </group>
+              </sheet>
+          </notebook>
+        </form>
+      </field>
 
     <!-- FORM REPRESENTANT -->
+
+    <record model="ir.ui.view" id="discografica.representant_form">
+      <field name="name">Representants</field>
+      <field name="model">discografica.representant</field>
+      <field name="arch" type="xml">
+        <form>
+          <notebook>
+            <page string="Pàgina 1">
+              <sheet>
+                <group>
+                  <separator string="Dades personals"/>
+                  <field name="name"/>
+                  <field name="surname"/>
+                  <field name="dni"/>
+                  <field name="birth_year"/>
+                  <field name="age"/>
+                  <field name="contact"/>
+                  <field name="photo"/>
+                </group>
+              </sheet>
+            </page>
+            <page string="Pàgina 2">
+              <sheet>
+                <group>
+                  <separator string="Cantants que representa"/>
+                  <field name="cantant"/>
+                </group>
+              </sheet>
+            </page>          
+          </notebook>
+        </form>
+      </field>
+    </record>
 
 
     <!-- FORM EVENT -->

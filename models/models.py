@@ -7,29 +7,25 @@ class Persona(AbstractModel):
     _name = 'discografica.persona'
     _description = 'discografica.persona'
 
-    name = fields.Char()
-    surname = fields.Char()
-    birth_year = fields.Integer()
-    age = fields.Integer(compute='_get_age', store=True)
-    contact = fields.Char()
+    name = fields.Char(string="Nom", required=True)
+    surname = fields.Char(string="Cognom", required=True)
+    birth_year = fields.Integer(string="Any de naixement", required=True)
+    age = fields.Integer(compute='_get_age', string="Edat", store=True)
+    contact = fields.Char(string="Contacte")
     dni = fields.Char(string="DNI")
+    photo = fields.Image(max_width = 200, max_height=200, string="Foto")
 
     @api.depends('birth_year')
     def _get_age(self):
         for persona in self:
             persona.age = fields.Datetime.now().year-persona.birth_year
 
-    @api.depends('birth_year')
-    def _get_age(self):
-        for persona in self:
-            persona.age = fields.Datetime.now().year-persona.birth_year
 
 class Cantants(models.Model, Persona):
     _name = 'discografica.cantants'
     _description = 'discografica.cantants'
 
-    photo = fields.Image(max_width = 200, max_height=200)
-    contracte = fields.Text()
+    contracte = fields.Text(string="Contracte")
     numAlbums = fields.Integer(compute='_compute_numAlbums', store=True)
     numPremis = fields.Integer()
     
@@ -49,18 +45,18 @@ class Albums(models.Model):
     _name = 'discografica.albums'
     _description = 'discografica.description'
 
-    name = fields.Char()
-    date = fields.Date()
-    description = fields.Text()
+    name = fields.Char(string="Títol", required=True)
+    date = fields.Date(string="Data de publicació")
+    description = fields.Text(string="Descripció")
     portada = fields.Image(max_width = 200, max_height=200)
     currency_id = fields.Many2one('res.currency', string='Moneda', default=lambda self: self.env.ref('base.EUR'))
     price = fields.Monetary(string="Preu", currency_field='currency_id')
     duracio_total = fields.Float(string="Duració total", compute='_compute_duracio_total', store=True)
-    ventes = fields.Integer()
+    ventes = fields.Integer(string="Ventes", default=0)
     moneyArreplegat = fields.Monetary(string="Diners arreplegats", currency_field='currency_id', compute='_compute_moneyArreplegat', store=True)
-    numSongs = fields.Integer(compute='_compute_numSongs', store=True)
+    numSongs = fields.Integer(compute='_compute_numSongs', string="Número Cançons", store=True)
     cantant = fields.Many2one('discografica.cantants')
-    song = fields.One2many('discografica.songs', 'album')
+    song = fields.One2many('discografica.songs', 'album', string="Cançons")
     
 
     @api.depends('song.duration_minutes')
@@ -84,10 +80,13 @@ class Cançons(models.Model):
     _name = 'discografica.songs'
     _description = 'discografica.songs'
 
-    title = fields.Char()
+    name = fields.Char(string="Títol", required=True)
     duration_minutes = fields.Float(string="Duració (minuts)", help="Duració de la cançó en minuts")
     duration_display = fields.Char(string="Duració", compute='_compute_duration_display', store=True)
-    writers = fields.Text()
+    writers = fields.Text(string="Autors")
+    lyrics = fields.Text(string="Lletres")
+    partitura = fields.Image(max_width = 200, max_height=200, string="Partitura")
+
 
     album = fields.Many2one('discografica.albums')
 
@@ -103,7 +102,6 @@ class Representants(models.Model, Persona):
     _name = 'discografica.representants'
     _description = 'discografica.representants'
 
-    photo = fields.Image(max_width = 200, max_height=200)
     cantant = fields.One2many('discografica.cantants', "representant")
 
 
@@ -112,13 +110,13 @@ class Events(models.Model):
     _name = 'discografica.events'
     _description = 'discografica.events'
 
-    name = fields.Char()
-    date = fields.Date()
-    description = fields.Text()
+    name = fields.Char(string="Nom", required=True)
+    date = fields.Date(string="Data")
+    description = fields.Text(string="Descripció")
     priceTicket = fields.Monetary(string="Preu entrada", currency_field='currency_id')
     currency_id = fields.Many2one('res.currency', string='Moneda', default=lambda self: self.env.ref('base.EUR'))
     assistents = fields.Integer()
-    location = fields.Char()
+    location = fields.Char(string="Ubicació")
     moneyArreplegat = fields.Monetary(string="Diners arreplegats", currency_field='currency_id', compute='_compute_moneyArreplegat', store=True)
     type = fields.Selection([('concert', 'Concert'), ('festival', 'Festival'), ('gira', 'Gira'), ('firma discos','Firma discos'), ('altres', 'Altres')], string="Tipus d'event", default='altres')
 
