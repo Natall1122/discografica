@@ -223,18 +223,20 @@
                 <group>
                   <separator string="Estructura"/>
                   <field name="lyrics"/>
-                  <field name="pratitura"/>
+                  <field name="partitura"/>
                 </group>
               </sheet>
+            </page>
           </notebook>
         </form>
       </field>
+    </record>
 
     <!-- FORM REPRESENTANT -->
 
     <record model="ir.ui.view" id="discografica.representant_form">
       <field name="name">Representants</field>
-      <field name="model">discografica.representant</field>
+      <field name="model">discografica.representants</field>
       <field name="arch" type="xml">
         <form>
           <notebook>
@@ -267,6 +269,34 @@
 
 
     <!-- FORM EVENT -->
+    <record model="ir.ui.view" id="discografica.events_form">
+      <field name="name">Events</field>
+      <field name="model">discografica.events</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <separator string="Dades de l'event"/>
+              <field name="name"/>
+              <field name="date"/>
+              <field name="location"/>
+              <field name="type"/>
+              <field name="cantants"/>
+              <field name="description"/>
+            </group>
+          </sheet>
+          <sheet>
+            <group>
+              <separator string="Dades monetàries"/>
+              <field name="currency_id"/>
+              <field name="priceTicket"/>
+              <field name="assistents"/>
+              <field name="moneyArreplegat"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
 
 
 
