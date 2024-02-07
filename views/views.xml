@@ -171,7 +171,6 @@
                   <field name="name"/>
                   <field name="date"/>
                   <field name="description"/>
-                  <field name="duracio_total"/>
                   <field name="portada"/>
                 </group>
               </sheet>
@@ -189,6 +188,7 @@
               <sheet>
                 <group>
                   <separator string="Dades cançons"/>
+                  <field name="duracio_total"/>
                   <field name="numSongs"/>
                   <field name="song"/>
                 </group>

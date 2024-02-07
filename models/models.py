@@ -51,19 +51,17 @@ class Albums(models.Model):
     portada = fields.Image(max_width = 200, max_height=200)
     currency_id = fields.Many2one('res.currency', string='Moneda', default=lambda self: self.env.ref('base.EUR'))
     price = fields.Monetary(string="Preu", currency_field='currency_id')
-    duracio_total = fields.Float(string="Duració total", compute='_compute_duracio_total', store=True)
+    duracio_total = fields.Char(string="Duració total", compute='_compute_duracio_total', store=True)
     ventes = fields.Integer(string="Ventes", default=0)
     moneyArreplegat = fields.Monetary(string="Diners arreplegats", currency_field='currency_id', compute='_compute_moneyArreplegat', store=True)
     numSongs = fields.Integer(compute='_compute_numSongs', string="Número Cançons", store=True)
     cantant = fields.Many2one('discografica.cantants')
     song = fields.One2many('discografica.songs', 'album', string="Cançons")
     
-
-    @api.depends('song.duration_minutes')
+    @api.depends('song')
     def _compute_duracio_total(self):
         for album in self:
-            album.duracio_total = sum(album.song.mapped('duration_minutes'))
-            album.duracio_total = "%d:%02d min" % (int(album.duracio_total), int((album.duracio_total - int(album.duracio_total)) * 60))
+            album.duracio_total = sum(song.duration_minutes for song in album.song)
 
     @api.depends('ventes', 'price')
     def _compute_moneyArreplegat(self):
