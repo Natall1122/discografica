@@ -135,6 +135,7 @@
                   <field name="age"/>
                   <field name="contact"/>
                   <field name="photo"/>
+                  <field name="representant"/>
                 </group>
               </sheet>
             </page>
@@ -142,7 +143,6 @@
               <sheet>
                 <group>
                   <separator string="Dades professionals"/>
-                  <field name="representant"/>
                   <field name="contracte"/>
                   <field name="numAlbums"/>
                   <field name="numPremis"/>
